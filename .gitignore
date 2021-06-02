@@ -1,0 +1,5 @@
+run_test/
+.DS_Stroe
+paint/
+*png
+__pycache__/
