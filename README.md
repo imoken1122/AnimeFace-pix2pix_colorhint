@@ -8,6 +8,7 @@ __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/0
   <img src="images/model.png" width=400 />
 
 </div>  
+  
 
 <center>Fig.1 : model overview</center>
 
@@ -17,7 +18,8 @@ __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/0
   <img src="images/generator.png" width=400 />
 </div>  
 
-<br>
+  
+  
 <center>Fig.2 : Generator overview (SLE U-Net)</center>
 
 <br>
