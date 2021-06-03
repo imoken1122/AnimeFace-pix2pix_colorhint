@@ -8,9 +8,10 @@ __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/0
   <img src="images/model.png" width=400 />
 
 </div>  
-  
 
-<center>Fig.1 : model overview</center>
+<br>
+
+<p align="center">Fig.1 : model overview</p>
 
 <br>
 
@@ -20,7 +21,7 @@ __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/0
 
   
   
-<center>Fig.2 : Generator overview (SLE U-Net)</center>
+<p align="center">　Fig.2 : Generator overview (SLE U-Net)</p>
 
 <br>
 
@@ -104,7 +105,7 @@ From right to left, Sketch, Self-specified color hints, Auto colorize generated 
 ![](images/tr_gen.png)  
 
 
-<center>Fig3: Automatic coloring using human color hints and line drawings as input to the Generator (train data)</center>  
+__<p align="center">Fig3: Automatic coloring using human color hints and line drawings as input to the Generator (train data)</p>__
 
 
 <br>
@@ -112,7 +113,7 @@ From right to left, Sketch, Self-specified color hints, Auto colorize generated 
 ![](images/test_gen.png)  
 
 
-<center>Fig4: Automatic coloring using human color hints and line drawings as input to the Generator (test data)</center>  
+__<p align="center">Fig4: Automatic coloring using human color hints and line drawings as input to the Generator (test data)</p>__
 
 
 <br>
@@ -124,4 +125,4 @@ The following are the results of the automatic color generation when the line dr
 ![](images/test_generate_None.png)  
 
 
-<center>Fig4: Automatic coloring using CircleMask color hints and line drawings as input to the Generator (train and test data)</center>
+__<p align="center">Fig4: Automatic coloring using CircleMask color hints and line drawings as input to the Generator (train and test data)</p>__
