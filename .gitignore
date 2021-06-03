@@ -1,5 +1,6 @@
 run_test/
-.DS_Stroe
+.DS_Store
 paint/
 *png
 __pycache__/
+a*

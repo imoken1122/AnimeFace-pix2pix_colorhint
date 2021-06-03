@@ -152,19 +152,18 @@ def create_dataloader(opt):
 def infer_dataloader(opt):
     dataloader = DataLoader(Dataset(f"{opt.input_path}",opt), batch_size=opt.batch_size, shuffle=True,drop_last=True,num_workers=2)
 
-
 """
-datasets = Dataset("../../faces/images/train",)
-#datasets = Dataset("../../pixiv_images")
-dataloader = data.DataLoader(datasets,batch_size=8,shuffle = True,num_workers = 2,drop_last = True)
+#datasets = Dataset("../../faces/images/train",)
+datasets = Dataset("../../tileimage")
+dataloader = data.DataLoader(datasets,batch_size=2,shuffle = True,num_workers = 2,drop_last = True)
 
 img,img_sk,img_rf=next(iter(dataloader))
 print(img[0].min(),img[0].max())
 print(img.shape,img_sk.shape)
 grid1 = tv.utils.make_grid(img)
-grid2 = tv.utils.make_grid(img_sk)
+#grid2 = tv.utils.make_grid(img_sk)
 grid3 = tv.utils.make_grid(img_rf)
-grid = th.cat([grid1,grid2,grid3],dim=1)
+grid = th.cat([grid1,grid3],dim=1)
 print(grid.shape)
 
 grid = np.transpose(( (grid + 1.) * 127.5)/255,[1,2,0])

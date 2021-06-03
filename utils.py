@@ -85,7 +85,7 @@ def plot_generated_image(img_full,img_sketch,img_gen,epoch,suffix, model_name):
     grid = np.transpose((grid/2 + 0.5),[1,2,0])
     plt.axis("off")
     plt.imshow(grid)
-    plt.savefig(f"{model_name}/figures/{suffix}_{epoch}.png")
+    plt.savefig(f"{model_name}/figures/{suffix}_{epoch}.png",dpi=200)
 
 def plot_selfpaint_generated_image(img_gen,img_sketch,img_ref,model_name,suffix):
     grid1 = tv.utils.make_grid(img_sketch)
@@ -129,16 +129,18 @@ def np2tensor(img,real = True):
 
 def read_img(path,sketch = False, ref=False):
     if ref:
-        img = cv2.resize(cv2.imread(path,-1 ),(256,256))
-        idx = np.where(img[:,:,3]==0)
-        img[idx] = [255]*4
+        img = cv2.resize(cv2.imread(path),(256,256))
+        #img = cv2.resize(cv2.imread(path,-1),(256,256))
+        #idx = np.where(img[:,:,3]==0)
+        #img[idx] = [255]*4
     else:
         img = cv2.resize(cv2.imread(path ,),(256,256))
 
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     if sketch:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img = make_contour_image(gray)
+        #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        #img = make_contour_image(gray)
+         img = linedraw(img).unsqueeze(0)
 
     return img
 
