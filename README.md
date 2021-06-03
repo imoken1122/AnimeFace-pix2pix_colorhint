@@ -7,21 +7,24 @@ __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/0
 <div align="center">
   <img src="images/model.png" width=400 />
 
-</div>
+</div>  
+
 <center>Fig.1 : model overview</center>
 
 <br>
 
 <div align="center">
   <img src="images/generator.png" width=400 />
-</div>
+</div>  
 
+<br>
 <center>Fig.2 : Generator overview (SLE U-Net)</center>
 
 <br>
 
+  
 
-## requirements
+## Requirements
 - Python, numpy
 - PyTorch
 - torchvision
@@ -93,23 +96,30 @@ $ python test.py --model_name first_model --which_epoch 10 --sle
 
 The following is the result of automatic color generation when I input the line drawing of the train and test data and the color hint I specified into the generator., which has been trained up to Epoch 26 and 20,000 images were used for training.
 
-From right to left, Sketch, Self-specified color hints, Auto colorize generated image.
+From right to left, Sketch, Self-specified color hints, Auto colorize generated image.  
 
-![](images/tr_gen.png)
 
-<center>Fig3: Automatic coloring using human color hints and line drawings as input to the Generator (train data)</center>
+![](images/tr_gen.png)  
+
+
+<center>Fig3: Automatic coloring using human color hints and line drawings as input to the Generator (train data)</center>  
+
 
 <br>
 
-![](images/test_gen.png)
+![](images/test_gen.png)  
 
-<center>Fig4: Automatic coloring using human color hints and line drawings as input to the Generator (test data)</center>
+
+<center>Fig4: Automatic coloring using human color hints and line drawings as input to the Generator (test data)</center>  
+
 
 <br>
 <br>
 
 The following are the results of the automatic color generation when the line drawings of the training and test data and the color hints from the circle mask (i.e. the color hints used for training) are input to the generator.
+  
 
-![](images/test_generate_None.png)
+![](images/test_generate_None.png)  
+
 
 <center>Fig4: Automatic coloring using CircleMask color hints and line drawings as input to the Generator (train and test data)</center>
