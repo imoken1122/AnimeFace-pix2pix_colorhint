@@ -48,25 +48,14 @@ class GridMask():
 
         return sample
 import random
-class Noise():
+class CircleMask():
     def __init__(self,p=0.85):
         self.p = p
         pass
 
     def __call__(self,sample):
         
-        #sample = sample.numpy()
-        h = sample.shape[1]
-        mask = np.ones((h,h), dtype=np.uint8) 
-        one = mask.flatten()
-        #idx = random.sample(np.arange(len(one)).tolist(),int((h*h)*self.p))
 
-        idx = np.random.choice(h*h,int((h*h)*self.p),False)
-        one[idx] = 0
-        mask = one.reshape(h,h)
-
-        #sample *= np.expand_dims(mask,2)
-        #sample[sample==0] = 255
         n = np.random.randint(70, 85,)
         sample = cv2.rectangle(sample, (0, 0), (255, 255), (255, 255, 255), thickness=30, lineType=cv2.LINE_4)
 
@@ -97,7 +86,7 @@ class Dataset(data.Dataset):
 
         self.len = len(self.img_path)
         self.gridmask = GridMask()
-        self.noise = Noise()
+        self.noise = CircleMask()
         self.opt = opt
 
 
@@ -123,18 +112,14 @@ class Dataset(data.Dataset):
 
 
 
-        #img2 = self.gridmask(img2)
-        #img2 = self.noise(img2)
-        #img_ref = self.tf_full(img2)   
-        #return img,img_sketch,img_ref
 
-        if not self.opt.color_sampler_model:
-            for n in self.opt.aug:
-                if n == "grid":
-                    img2 = self.gridmask(img2)
-                if n == "circle":
-                    img2 = self.noise(img2)
-            img_ref = self.tf_full(img2)
+
+        for n in self.opt.aug:
+            if n == "grid":
+                img2 = self.gridmask(img2)
+            if n == "circle":
+                img2 = self.noise(img2)
+        img_ref = self.tf_full(img2)
             
         return img,img_sketch,img_ref
 
@@ -148,29 +133,3 @@ def create_dataloader(opt):
     dataloader = DataLoader(Dataset(f"{opt.input_path}",opt), batch_size=opt.batch_size, shuffle=True,drop_last=True,num_workers=2)
 
     return dataloader
-
-def infer_dataloader(opt):
-    dataloader = DataLoader(Dataset(f"{opt.input_path}",opt), batch_size=opt.batch_size, shuffle=True,drop_last=True,num_workers=2)
-
-"""
-#datasets = Dataset("../../faces/images/train",)
-datasets = Dataset("../../tileimage")
-dataloader = data.DataLoader(datasets,batch_size=2,shuffle = True,num_workers = 2,drop_last = True)
-
-img,img_sk,img_rf=next(iter(dataloader))
-print(img[0].min(),img[0].max())
-print(img.shape,img_sk.shape)
-grid1 = tv.utils.make_grid(img)
-#grid2 = tv.utils.make_grid(img_sk)
-grid3 = tv.utils.make_grid(img_rf)
-grid = th.cat([grid1,grid3],dim=1)
-print(grid.shape)
-
-grid = np.transpose(( (grid + 1.) * 127.5)/255,[1,2,0])
-print(grid.min(),grid.max(),)
-plt.axis("off")
-plt.imshow(grid)
-plt.savefig("output.png")
-#tv.utils.save_image(grid,"output.png")
-print(grid.shape)
-"""

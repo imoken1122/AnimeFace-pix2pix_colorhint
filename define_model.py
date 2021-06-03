@@ -59,10 +59,7 @@ class pix2pixModel(nn.Module):
     def calc_G_loss(self,real_img,sketch_img,ref_img):
         
         G_losses = {}
-        if self.opt.color_sampler_model:
-            x = sketch_img
-        else:
-            x = th.cat([sketch_img,ref_img],1)
+        x = th.cat([sketch_img,ref_img],1)
 
         self.fake_img = self.netG(x)
         pred_fake,pred_real = self.excute_discriminate(self.fake_img,real_img,sketch_img,ref_img)
@@ -91,12 +88,8 @@ class pix2pixModel(nn.Module):
 
 
     def excute_discriminate(self,fake_img,real_img,sketch_img,ref_img):
-        if self.opt.color_sampler_model:
-            fake_concat = th.cat([sketch_img,fake_img],1)
-            real_concat = th.cat([sketch_img,real_img],1)
-        else:
-            fake_concat = th.cat([sketch_img,fake_img,ref_img],1)
-            real_concat = th.cat([sketch_img,real_img,ref_img],1)
+        fake_concat = th.cat([sketch_img,fake_img,ref_img],1)
+        real_concat = th.cat([sketch_img,real_img,ref_img],1)
 
         fake_and_real=th.cat([fake_concat,real_concat],0)
 
@@ -105,10 +98,7 @@ class pix2pixModel(nn.Module):
         return pred_fake,pred_real
 
     def generate_fake(self,ref_img,sketch_img):
-        if self.opt.color_sampler_model:
-            x = sketch_img
-        else:
-            x = th.cat([sketch_img,ref_img],1)
+        x = th.cat([sketch_img,ref_img],1)
         return self.netG(x)
 
     def save(self,epoch):

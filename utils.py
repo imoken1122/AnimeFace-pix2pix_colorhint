@@ -87,7 +87,7 @@ def plot_generated_image(img_full,img_sketch,img_gen,epoch,suffix, model_name):
     plt.imshow(grid)
     plt.savefig(f"{model_name}/figures/{suffix}_{epoch}.png",dpi=200)
 
-def plot_selfpaint_generated_image(img_gen,img_sketch,img_ref,model_name,suffix):
+def plot_mycolorhint_generated_image(img_gen,img_sketch,img_ref,model_name,suffix):
     grid1 = tv.utils.make_grid(img_sketch)
     grid2 = tv.utils.make_grid(img_ref)
     grid3 = tv.utils.make_grid(img_gen)
@@ -127,20 +127,15 @@ def np2tensor(img,real = True):
             ])
         return tf_sketch(img).unsqueeze(0)
 
-def read_img(path,sketch = False, ref=False):
-    if ref:
-        img = cv2.resize(cv2.imread(path),(256,256))
-        #img = cv2.resize(cv2.imread(path,-1),(256,256))
-        #idx = np.where(img[:,:,3]==0)
-        #img[idx] = [255]*4
-    else:
-        img = cv2.resize(cv2.imread(path ,),(256,256))
-
+def read_img(path,sketch = False):
+    img = cv2.resize(cv2.imread(path ,),(256,256))
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     if sketch:
         #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         #img = make_contour_image(gray)
-         img = linedraw(img).unsqueeze(0)
+        img = linedraw(img).unsqueeze(0)
+    else:
+        img = np2tensor(img)
 
     return img
 
@@ -165,19 +160,13 @@ def show_tensor(input_image_tensor):
     plt.show()
 
 def linedraw(img):
-    # データの読み込み
     x = load_tensor(img)
-    # Y = 0.299R + 0.587G + 0.114B　でグレースケール化
     gray_kernel = torch.as_tensor(
         np.array([0.299, 0.587, 0.114], np.float32).reshape(1, 3, 1, 1))
     x = F.conv2d(x, gray_kernel) # 行列積は畳み込み関数でOK
-    # 3x3カーネルで膨張1回（膨張はMaxPoolと同じ）
     dilated = F.max_pool2d(x, kernel_size=3, stride=1, padding=1)
-    # 膨張の前後でL1の差分を取る
     diff = torch.abs(x-dilated)    
-    # ネガポジ反転
     x = 1.0 - diff
-    # 結果表示
     tf = transforms.Compose([transforms.Normalize((0.5,),(0.5,))])
     x = tf(x[0])
     return x

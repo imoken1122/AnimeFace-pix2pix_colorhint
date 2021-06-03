@@ -35,8 +35,10 @@ def define_G(opt):
     device = "cuda" if opt.cuda else "cpu"
 
     if opt.sle:
+        print("setting SLE_UNet_Generator")
         net = SLE_UNet_Generator(opt)
     else:
+        print("setting standard_Generator")
         net = Generator(opt)
 
     net = init_weights(net,init_type = opt.init_type)
