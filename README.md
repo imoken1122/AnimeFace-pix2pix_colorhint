@@ -1,5 +1,6 @@
 # AnimeFace pix2pix with color hint
-In this repository, we have experimented with automatic colorization of line drawings of anime faces([AnimeFace datasets](https://www.kaggle.com/scribbless/another-anime-face-dataset)) using U-Net and GAN-based networks with skip-layer exicitation (SLEblock).
+
+In this repository, we have experimented with automatic colorization with color hint of line drawings of anime faces([AnimeFace datasets](https://www.kaggle.com/scribbless/another-anime-face-dataset)) using U-Net and GAN-based networks conbine skip-layer exicitation (SLEblock).
 
 __[Read more about this here.](https://imoken1122.hatenablog.com/entry/2021/06/03/173235?_ga=2.97286879.1198031966.1622637948-753262940.1617945793)__
 
